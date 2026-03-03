@@ -3,12 +3,23 @@
  */
 package org.example;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import java.util.ArrayList;
+import java.util.Arrays;
 
+/**
+ * Задание №2, Вариант №1
+ */
+public class App {
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        var arr = new ArrayList<>(Arrays.asList(6, 3, 24, 64, 12, 75));
+
+        var sorter = new ArraysSorter<Integer>();
+        var res = sorter.sortMerge(arr, Integer::compareTo);
+
+        System.out.println("Исходный список: " + arr);
+        System.out.println("Отсортированный список: " + res);
+
+        // Исходный список: [6, 3, 24, 64, 12, 75]
+        // Отсортированный список: [3, 6, 12, 24, 64, 75]
     }
 }

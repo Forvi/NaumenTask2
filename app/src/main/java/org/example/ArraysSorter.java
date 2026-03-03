@@ -1,12 +1,8 @@
 package org.example;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 
-/**
- * Задание №2, Вариант №1
- */
 public class ArraysSorter<T extends Number> {
 
     /** Рекурсивно делит список надвое и сортирует на основе comparator'а */
@@ -40,16 +36,4 @@ public class ArraysSorter<T extends Number> {
         return res;
     }
 
-    public static void main(String[] args) {
-        var arr = new ArrayList<>(Arrays.asList(6, 3, 24, 64, 12, 75));
-
-        var sorter = new ArraysSorter<Integer>();
-        var res = sorter.sortMerge(arr, Integer::compareTo);
-
-        System.out.println("Исходный список: " + arr);
-        System.out.println("Отсортированный список: " + res);
-
-        // Исходный список: [6, 3, 24, 64, 12, 75]
-        // Отсортированный список: [3, 6, 12, 24, 64, 75]
-    }
 }
