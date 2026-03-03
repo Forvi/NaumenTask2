@@ -3,12 +3,28 @@
  */
 package org.example;
 
+import java.util.ArrayList;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
+
+    /**
+     * Задание №3, Вариант 1
+     */
+    public static void main(String[] args) {
+        var app = new App();
+
+        var employeeList = new ArrayList<Employee>();
+        app.fillList(employeeList);
+
+        var result = employeeList.stream().filter(e -> e.getAge() > 30);
+        result.forEach(System.out::println);
     }
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+    private void fillList(ArrayList<Employee> list) {
+        list.add(new Employee("Петров Петр Петрович", 32, "IT", 65_000.0));
+        list.add(new Employee("Иванов Иван Иванов", 23, "Marketing", 58_000.0));
+        list.add(new Employee("Васильев Василий Васильевич", 37, "Management", 120_000.0));
+        list.add(new Employee("Попова Анна Владимировна", 18, "Design", 35_000.0));
+        list.add(new Employee("Лавров Никита Алексеевич", 22, "IT", 60_000.0));
     }
 }
