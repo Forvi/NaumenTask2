@@ -2,7 +2,7 @@ package org.example;
 
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Task task = new TaskImpl();
 
         // По завершению таймеры выполняется коллбэк функция
@@ -12,7 +12,7 @@ public class App {
         });
 
         // Но если досрочно завершить выполнение поток - задача не выполнится
-        // Thread.sleep(1000);
-        // task.stop();
+        Thread.sleep(5000);
+        task.stop();
     }
 }

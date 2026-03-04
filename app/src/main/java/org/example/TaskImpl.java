@@ -12,26 +12,36 @@ public class TaskImpl implements Task {
         this.isRunning = false;
     }
 
-    /** Запускает таймер и задачу, которая должна выполниться по завершению */
     @Override
-    public void start(long time, Runner runner) {
-        if (time <= 0) {
+    public void start(long totalTime, Runner runner) {
+        if (totalTime <= 0) {
             runner.run();
             return;
         }
 
         thread = new Thread(() -> {
-            isRunning = true;
+            this.isRunning = true;
+            long startTime = System.currentTimeMillis();
 
             try {
-                Thread.sleep(time);
-                if (isRunning && !Thread.currentThread().isInterrupted()) {
-                    runner.run();
+                while (isRunning && !Thread.currentThread().isInterrupted()) {
+                    Thread.sleep(1000);
+
+                    long elapsed = System.currentTimeMillis() - startTime;
+                    long remaining = totalTime - elapsed;
+
+                    System.out.println(format(Math.max(0, remaining)));
+                    if (elapsed >= totalTime) {
+                        if (isRunning && !Thread.currentThread().isInterrupted()) {
+                            runner.run();
+                        }
+
+                        break;
+                    }
                 }
 
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-
             } finally {
                 isRunning = false;
             }
@@ -41,7 +51,6 @@ public class TaskImpl implements Task {
         thread.start();
     }
 
-    /** Останавливает выполнения поток */
     @Override
     public void stop() {
         if (thread != null && isRunning) {
@@ -49,4 +58,12 @@ public class TaskImpl implements Task {
             thread.interrupt();
         }
     }
+
+    private String format(long time) {
+        long total = time / 1000;
+        long minutes = total / 60;
+        long seconds = total % 60;
+        return String.format("%02d:%02d", minutes, seconds);
+    }
+
 }
