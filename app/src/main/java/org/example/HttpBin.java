@@ -1,5 +1,8 @@
 package org.example;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -23,11 +26,9 @@ public class HttpBin {
                     HttpResponse.BodyHandlers.ofString()
             );
 
-            String[] resArr = res.body().split("\"");
-            for (int i = 0; i < resArr.length; i++)
-                if (resArr[i].equals("origin")) return resArr[i + 2];
-
-            return "";
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(res.body());
+            return root.get("origin").asText();
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }

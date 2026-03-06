@@ -1,6 +1,6 @@
 package org.example;
 
-public interface Task<T> {
+public interface Task {
     // я решил добавить время выполнения и задачу
 
     /** Запускает задачу */

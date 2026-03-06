@@ -45,8 +45,6 @@ public class App {
         scanner.close();
     }
 
-
-
     private void startTask1() {
         Integer[] numbers = { -1, -23, 1, 4, 6, 7, 15 };
         System.out.println("Исходный массив: " + Arrays.toString(numbers));
@@ -69,10 +67,8 @@ public class App {
     }
 
     private void startTask3() {
-        var app = new App();
-
         var employeeList = new ArrayList<Employee>();
-        app.fillList(employeeList);
+        App.fillList(employeeList);
 
         System.out.println("Исходный список:");
         employeeList.forEach(System.out::println);
@@ -82,7 +78,7 @@ public class App {
         result.forEach(System.out::println);
     }
 
-    private void fillList(ArrayList<Employee> list) {
+    private static void fillList(ArrayList<Employee> list) {
         list.add(new Employee("Петров Петр Петрович", 32, "IT", 65_000.0));
         list.add(new Employee("Иванов Иван Иванов", 23, "Marketing", 58_000.0));
         list.add(new Employee("Васильев Василий Васильевич", 37, "Management", 120_000.0));
